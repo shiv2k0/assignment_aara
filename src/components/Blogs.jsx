@@ -1,35 +1,41 @@
 import { Link } from "react-router-dom";
 import articles from "../database/data";
+import { Helmet } from "react-helmet";
 
 const Blogs = () => {
   return (
-    <div className="flex flex-col w-[70vw] min-w-md max-w-4xl">
-      {articles.map((article) => (
-        <article className="flex m-10 gap-5 " key={article.id}>
-          <img
-            src={article.imgUrl}
-            alt={article.id}
-            className="w-52 h-52 object-cover hidden md:block"
-          />
-          <div>
+    <>
+      <Helmet>
+        <title>Blogs</title>
+      </Helmet>
+      <div className="flex flex-col w-[70vw] min-w-md max-w-4xl">
+        {articles.map((article) => (
+          <article className="flex m-10 gap-5 " key={article.id}>
             <img
               src={article.imgUrl}
               alt={article.id}
-              className="w-52 h-52 object-cover block md:hidden "
+              className="w-52 h-52 object-cover hidden md:block"
             />
-            <Link to={article.id}>
-              <div className="text-2xl font-bold">{article.title}</div>
-            </Link>
             <div>
-              {article.content.slice(0, 200)}...{" "}
+              <img
+                src={article.imgUrl}
+                alt={article.id}
+                className="w-52 h-52 object-cover block md:hidden "
+              />
               <Link to={article.id}>
-                <span className="text-blue-700">more</span>
+                <div className="text-2xl font-bold">{article.title}</div>
               </Link>
+              <div>
+                {article.content.slice(0, 200)}...{" "}
+                <Link to={article.id}>
+                  <span className="text-blue-700">more</span>
+                </Link>
+              </div>
             </div>
-          </div>
-        </article>
-      ))}
-    </div>
+          </article>
+        ))}
+      </div>
+    </>
   );
 };
 export default Blogs;
